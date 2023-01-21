@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.hf')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Contact us page</title>
-</head>
-
-<body>
-    <h1>Contact us page</h1>
-</body>
-
-</html>
+@section('body-content')
+    <section>
+        <div class="container">
+            <div class="jumbotron">
+                <h1 class="display-3">Contact Us</h1>
+            </div>
+        </div>
+    </section>
+@endsection
