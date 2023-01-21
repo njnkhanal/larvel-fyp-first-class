@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <h1>Fyp Class</h1>
+    <h1>About page</h1>
 </body>
 
 </html>

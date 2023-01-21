@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Laravel Class</title>
+    <title>Contact us page</title>
 </head>
 
 <body>
-    <h1>Fyp Class</h1>
+    <h1>Contact us page</h1>
 </body>
 
 </html>
