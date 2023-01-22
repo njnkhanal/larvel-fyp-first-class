@@ -20,4 +20,8 @@ class FrontendController extends Controller
     {
         return view('contact');
     }
+    public function categorypage($name)
+    {
+        return view('category', compact('name'));
+    }
 }
