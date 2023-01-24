@@ -32,10 +32,32 @@
                         <a class="nav-link" href="/contact">Contact</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                <div class="d-inline my-2 my-lg-0">
+                    {{-- @auth
+                        <a class="btn btn-info" href="{{ route('login') }}" role="button">Logout</a>
+                    @else
+                        <a class="btn btn-info" href="{{ route('login') }}" role="button">Login</a>
+                        <a class="btn btn-success" href="{{ route('register') }}" role="button">Register</a>
+                    @endauth --}}
+
+                    @if (Auth::user())
+                        <div class="dropdown open">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="triggerId">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button class="dropdown-item" type="submit">Logout</button>
+                                </form>
+                            </div>
+                        </div>
+                    @else
+                        <a class="btn btn-info" href="{{ route('login') }}" role="button">Login</a>
+                        <a class="btn btn-success" href="{{ route('register') }}" role="button">Register</a>
+                    @endif
+                </div>
             </div>
         </nav>
     </header>
