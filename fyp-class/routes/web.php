@@ -31,9 +31,11 @@ Route::get('/about', [App\Http\Controllers\FrontendController::class, 'aboutpage
 Route::get('/contact', [App\Http\Controllers\FrontendController::class, 'contactpage']);
 Route::get('/category/{name}', [App\Http\Controllers\FrontendController::class, 'categorypage']);
 
-Route::get('/profile', [App\Http\Controllers\FrontendController::class, 'profilepage'])->middleware('auth');
+Route::get('/profile', [App\Http\Controllers\FrontendController::class, 'profilepage'])->middleware('auth', 'verified');
 
-Auth::routes();
+Auth::routes([
+    'verify' => true,
+]);
 
 // Route::get('/home', [App\Http\Controllers\FrontendController::class, 'homepage'])->name('home');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
