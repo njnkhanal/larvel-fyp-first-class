@@ -31,6 +31,8 @@ Route::get('/about', [App\Http\Controllers\FrontendController::class, 'aboutpage
 Route::get('/contact', [App\Http\Controllers\FrontendController::class, 'contactpage']);
 Route::get('/category/{name}', [App\Http\Controllers\FrontendController::class, 'categorypage']);
 
+Route::get('/profile', [App\Http\Controllers\FrontendController::class, 'profilepage'])->middleware('auth');
+
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\FrontendController::class, 'homepage'])->name('home');
