@@ -43,4 +43,4 @@ Auth::routes([
 
 
 
-Route::get('/admin', [App\Http\Controllers\AdminController::class, 'admin']);
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'admin'])->middleware('auth');
