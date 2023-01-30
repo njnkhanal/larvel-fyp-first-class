@@ -43,4 +43,7 @@ Auth::routes([
 
 
 
-Route::get('/admin', [App\Http\Controllers\AdminController::class, 'admin'])->middleware('auth');
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/', [App\Http\Controllers\AdminController::class, 'admin']);
+    Route::resource('/category', App\Http\Controllers\CategoryController::class);
+});
