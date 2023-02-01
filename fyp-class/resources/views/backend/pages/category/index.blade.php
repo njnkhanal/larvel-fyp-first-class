@@ -18,6 +18,11 @@
                     <h5 class="card-title">Category Table <a href="{{ route('category.create') }}"
                             class="btn btn-sm btn-primary">Add New</a></h5>
 
+                    @if (session('success'))
+                        <div class="alert alert-success" role="alert">
+                            <strong>success: </strong> {{ session('success') }}
+                        </div>
+                    @endif
                     <!-- Default Table -->
                     <table class="table">
                         <thead>
@@ -30,13 +35,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Brandon Jacob</td>
-                                <td>Designer</td>
-                                <td>28</td>
-                                <td>2016-05-25</td>
-                            </tr>
+                            @foreach ($categories as $category)
+                                <tr>
+                                    <th scope="row">{{ $category->id }}</th>
+                                    <td>{{ $category->title }}</td>
+                                    <td>
+                                        <img src="{{ asset($category->image) }}" alt="" height="50px">
+                                    </td>
+                                    <td><button class="btn">
+                                            Status <span class="badge bg-primary">{{ $category->status }}</span>
+                                        </button></td>
+                                    <td>
+                                        <a name="" id="" class="btn btn-dark" href="#"
+                                            role="button">Edit</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                     <!-- End Default Table Example -->

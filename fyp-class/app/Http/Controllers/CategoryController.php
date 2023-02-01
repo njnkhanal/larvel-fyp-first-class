@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,7 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('backend.pages.category.index');
+        $categories = Category::all();
+        return view('backend.pages.category.index', compact('categories'));
     }
 
     /**
@@ -35,7 +37,26 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validation
+        $request->validate([
+            'title' => 'required|string|max:200|unique:categories,title',
+            'image' => 'nullable|image|mimes:jpg,png,gif,webp,svg|max:2048',
+            'status' => 'required|in:active,inactive'
+        ]);
+        // dd($request->all());
+        $data = $request->all();
+        // store image to public file
+        $data['image'] = null;
+        if ($request->hasFile('image')) { // check condition is image exists or not
+            $img = $request->file('image'); // get image file in img variable
+            $img_path = 'upload/category/'; // set path to save the image
+            $img_name = Str::random(3) . now()->format('Y-m-d-his') . '.' . $img->getClientOriginalExtension(); // set name with time and extention to save image
+            $img->move($img_path, $img_name); // move the image file to the destination path with the name
+            // pass image name to the datbase
+            $data['image'] = $img_path . $img_name;
+        }
+        Category::create($data);
+        return redirect(route('category.index'))->with('success', 'Category Stored Successfully!');
     }
 
     /**
