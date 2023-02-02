@@ -76,9 +76,10 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        //
+        $category  = Category::findOrFail($id);
+        return view('backend.pages.category.edit', compact('category'));
     }
 
     /**
@@ -88,9 +89,31 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+        $category  = Category::findOrFail($id);
+        // validation
+        $request->validate([
+            'title' => 'required|string|max:200|unique:categories,title,' . $id,
+            'image' => 'nullable|image|mimes:jpg,png,gif,webp,svg|max:2048',
+            'status' => 'required|in:active,inactive'
+        ]);
+        // take request data
+        $data = $request->all();
+        // store image to public file
+        $data['image'] = $category->image; // set deafult category image
+        if ($request->hasFile('image')) { // check condition is image exists or not
+            $img = $request->file('image'); // get image file in img variable
+            $img_path = 'upload/category/'; // set path to save the image
+            $img_name = Str::random(3) . now()->format('Y-m-d-his') . '.' . $img->getClientOriginalExtension(); // set name with time and extention to save image
+            $img->move($img_path, $img_name); // move the image file to the destination path with the name
+            // pass image name to the datbase
+            $data['image'] = $img_path . $img_name;
+        }
+
+        // update category
+        $category->update($data);
+        return redirect(route('category.index'))->with('success', 'Category Updated Successfully!');
     }
 
     /**
@@ -99,8 +122,10 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        $category  = Category::findOrFail($id);
+        $category->delete();
+        return back()->with('success', 'Category Deleted Successfully!');
     }
 }

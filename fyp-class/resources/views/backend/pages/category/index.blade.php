@@ -46,8 +46,13 @@
                                             Status <span class="badge bg-primary">{{ $category->status }}</span>
                                         </button></td>
                                     <td>
-                                        <a name="" id="" class="btn btn-dark" href="#"
+                                        <a class="btn btn-dark" href="{{ route('category.edit', $category->id) }}"
                                             role="button">Edit</a>
+                                        <form action="{{ route('category.destroy', $category->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-dark" type="submit">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
