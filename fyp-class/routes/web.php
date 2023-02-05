@@ -46,4 +46,5 @@ Auth::routes([
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/', [App\Http\Controllers\AdminController::class, 'admin']);
     Route::resource('/category', App\Http\Controllers\CategoryController::class);
+    Route::resource('/job', App\Http\Controllers\JobController::class);
 });
