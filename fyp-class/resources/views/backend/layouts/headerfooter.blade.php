@@ -116,6 +116,14 @@
                     <span>Jobs</span>
                 </a>
             </li>
+            @can('admin')
+                <li class="nav-item">
+                    <a class="nav-link " href="{{ route('user.index') }}">
+                        <i class="bi bi-grid"></i>
+                        <span>Users</span>
+                    </a>
+                </li>
+            @endcan
 
         </ul>
 

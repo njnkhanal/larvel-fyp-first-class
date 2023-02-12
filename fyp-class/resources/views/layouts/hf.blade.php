@@ -47,6 +47,8 @@
                                 {{ Auth::user()->name }}
                             </button>
                             <div class="dropdown-menu" aria-labelledby="triggerId">
+                                <a href="{{ route('my.profile') }}" class="dropdown-item"><i class="fa fa-user"
+                                        aria-hidden="true"></i> My Profile</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <button class="dropdown-item" type="submit">Logout</button>

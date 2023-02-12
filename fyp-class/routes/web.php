@@ -32,7 +32,7 @@ Route::get('/about', [App\Http\Controllers\FrontendController::class, 'aboutpage
 Route::get('/contact', [App\Http\Controllers\FrontendController::class, 'contactpage']);
 Route::get('/category/{name}', [App\Http\Controllers\FrontendController::class, 'categorypage']);
 
-Route::get('/profile', [App\Http\Controllers\FrontendController::class, 'profilepage'])->middleware('auth', 'verified');
+Route::get('/profile', [App\Http\Controllers\FrontendController::class, 'profilepage'])->middleware('auth', 'verified')->name('my.profile');
 
 Auth::routes([
     'verify' => true,
@@ -47,4 +47,5 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/', [App\Http\Controllers\AdminController::class, 'admin']);
     Route::resource('/category', App\Http\Controllers\CategoryController::class);
     Route::resource('/job', App\Http\Controllers\JobController::class);
+    Route::resource('/user', App\Http\Controllers\UserController::class)->middleware('admin');
 });
