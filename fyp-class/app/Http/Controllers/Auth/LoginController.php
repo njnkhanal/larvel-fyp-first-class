@@ -33,6 +33,8 @@ class LoginController extends Controller
     {
         if (Auth::user()->role == 'admin') {
             return RouteServiceProvider::HOME;
+        } elseif (Auth::user()->role == 'company') {
+            return RouteServiceProvider::COMPANY;
         } elseif (Auth::user()->role == 'user') {
             return RouteServiceProvider::USER;
         }

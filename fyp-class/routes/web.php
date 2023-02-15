@@ -43,9 +43,14 @@ Auth::routes([
 
 
 
-Route::prefix('admin')->middleware('auth')->group(function () {
+Route::prefix('admin')->middleware('auth', 'admin')->group(function () {
     Route::get('/', [App\Http\Controllers\AdminController::class, 'admin']);
     Route::resource('/category', App\Http\Controllers\CategoryController::class);
     Route::resource('/job', App\Http\Controllers\JobController::class);
-    Route::resource('/user', App\Http\Controllers\UserController::class)->middleware('admin');
+    Route::resource('/user', App\Http\Controllers\UserController::class);
+});
+
+Route::prefix('company')->as('company.')->middleware('auth')->group(function () {
+    Route::get('/', [App\Http\Controllers\CompanyController::class, 'company']);
+    Route::resource('/job', App\Http\Controllers\CompanyJobController::class);
 });

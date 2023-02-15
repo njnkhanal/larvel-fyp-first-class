@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\job;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class jobController extends Controller
 {
@@ -17,6 +18,9 @@ class jobController extends Controller
     public function index()
     {
         $jobs = Job::all();
+        if (Auth::user()->role == 'company') {
+            return view('company.pages.job.index', compact('jobs'));
+        }
         return view('backend.pages.job.index', compact('jobs'));
     }
 
