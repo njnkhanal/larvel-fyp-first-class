@@ -3,11 +3,21 @@
 @section('body-content')
     <section>
         <div class="container">
-            <div class="jumbotron">
-                <h1 class="display-3">Homepage</h1>
-                <img src="{{ asset('frontend/backgroud.jpg') }}" class="mt-4" width="100%" alt="">
+            <h1>Jobs</h1>
+            <div class="row">
+                @foreach ($jobs as $job)
+                    <div class="col-md-3 col-12">
+                        <div class="card border-primary">
+                            <img src="{{ asset($job->category ? $job->category->image : ' ') }}" alt="" width="100%">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ $job->title }}</h4>
+                                <p class="card-text">{{ $job->category ? $job->category->title : '' }}</p>
+                            </div>
+                            <a href="{{ route('job.detail',$job->id) }}" class="btn btn-dark">View More</a>
+                        </div>
+                    </div>
+                @endforeach
             </div>
-            <button class="btn-test">Test Css</button>
         </div>
     </section>
 @endsection

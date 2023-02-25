@@ -9,7 +9,6 @@
             </ol>
         </nav>
     </div><!-- End Page Title -->
-
     <section class="section dashboard">
         <div>
             <div class="card">
@@ -19,16 +18,6 @@
                     <!-- Horizontal Form -->
                     <form method="POST" action="{{ route('job.store') }}" enctype="multipart/form-data">
                         @csrf
-                        {{-- @foreach ($errors->all() as $error)
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-
-                                <strong>Error: </strong> {{ $error }}
-                            </div>
-
-                            <script>
-                                $(".alert").alert();
-                            </script>
-                        @endforeach --}}
                         <div class="row mb-3">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Title</label>
                             <div class="col-sm-10">
@@ -39,20 +28,10 @@
                                 @enderror
                             </div>
                         </div>
-                        {{-- <div class="row mb-3">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Image</label>
-                            <div class="col-sm-10">
-                                <input type="file" class="form-control @error('title') is-invalid @enderror"
-                                    name="image" id="inputEmail">
-                                @error('image')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                        </div> --}}
                         <div class="row mb-3">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">description</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="inputText">{{ old('description') }}</textarea>
+                                <textarea class="form-control summernote @error('description') is-invalid @enderror" name="description" id="inputText">{{ old('description') }}</textarea>
                                 @error('description')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -101,9 +80,27 @@
                             <a href="{{ route('job.index') }}" class="btn btn-secondary">Return</a>
                         </div>
                     </form><!-- End Horizontal Form -->
-
                 </div>
             </div>
         </div>
     </section>
+@endsection
+
+@section('scripts')
+    <script>
+        $('.summernote').summernote({
+            placeholder: 'Hello stand alone ui',
+            tabsize: 2,
+            height: 120,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        });
+    </script>
 @endsection

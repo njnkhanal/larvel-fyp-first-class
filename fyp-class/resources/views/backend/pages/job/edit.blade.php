@@ -54,7 +54,7 @@
                         <div class="row mb-3">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">description</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="inputText">{{ $job->description }}</textarea>
+                                <textarea class="form-control summernote @error('description') is-invalid @enderror" name="description" id="inputText">{{ $job->description }}</textarea>
                                 @error('description')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -110,4 +110,23 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('scripts')
+    <script>
+        $('.summernote').summernote({
+            placeholder: 'Hello stand alone ui',
+            tabsize: 2,
+            height: 120,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        });
+    </script>
 @endsection

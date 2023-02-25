@@ -28,9 +28,16 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [App\Http\Controllers\FrontendController::class, 'homepage']);
+Route::get('/job/{id}', [App\Http\Controllers\FrontendController::class, 'jobdetail'])->name('job.detail');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/job/{id}/applied', [App\Http\Controllers\FrontendController::class, 'jobApplied'])->name('job.applied');
+    Route::post('/job/{id}', [App\Http\Controllers\ApplyJobController::class, 'store'])->name('job.apply.store');
+});
+
 Route::get('/about', [App\Http\Controllers\FrontendController::class, 'aboutpage']);
 Route::get('/contact', [App\Http\Controllers\FrontendController::class, 'contactpage']);
-Route::get('/category/{name}', [App\Http\Controllers\FrontendController::class, 'categorypage']);
+// Route::get('/category/{name}', [App\Http\Controllers\FrontendController::class, 'categorypage']);
 
 Route::get('/profile', [App\Http\Controllers\FrontendController::class, 'profilepage'])->middleware('auth', 'verified')->name('my.profile');
 
@@ -45,6 +52,7 @@ Auth::routes([
 
 Route::prefix('admin')->middleware('auth', 'admin')->group(function () {
     Route::get('/', [App\Http\Controllers\AdminController::class, 'admin']);
+    Route::get('/jobapply', [App\Http\Controllers\ApplyJobController::class, 'index'])->name('applyjob.index');
     Route::resource('/category', App\Http\Controllers\CategoryController::class);
     Route::resource('/job', App\Http\Controllers\JobController::class);
     Route::resource('/user', App\Http\Controllers\UserController::class);

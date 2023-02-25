@@ -31,6 +31,8 @@
     <!-- Template Main CSS File -->
     <link href="{{ asset('backend/assets/css/style.css') }}" rel="stylesheet">
 
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -116,6 +118,12 @@
                     <span>Jobs</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('applyjob.index') }}">
+                    <i class="bi bi-grid"></i>
+                    <span>Job Applied</span>
+                </a>
+            </li>
             {{-- @can('admin') --}}
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('user.index') }}">
@@ -162,10 +170,12 @@
     <script src="{{ asset('backend/assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
     <script src="{{ asset('backend/assets/vendor/tinymce/tinymce.min.js') }}"></script>
     <script src="{{ asset('backend/assets/vendor/php-email-form/validate.js') }}"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <!-- Template Main JS File -->
     <script src="{{ asset('backend/assets/js/main.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
+    @yield('scripts')
 </body>
 
 </html>
