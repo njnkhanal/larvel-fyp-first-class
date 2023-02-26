@@ -10,4 +10,8 @@ class CompanyController extends Controller
     {
         return view('company.pages.dashboard');
     }
+    public function index()
+    {
+        return view();
+    }
 }
