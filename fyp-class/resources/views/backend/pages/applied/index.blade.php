@@ -40,7 +40,7 @@
                             @foreach ($applied as $apply)
                                 <tr>
                                     <th scope="row">{{ $apply->id }}</th>
-                                    <td>{{ $apply->name }}</td>
+                                    <td>{{ $apply->name }} <span class="badge bg-dark">{{ $apply->status }}</span></td>
                                     <td>{{ $apply->address }}</td>
                                     <td>{{ $apply->contact }}</td>
                                     <td>{{ $apply->email }}</td>
