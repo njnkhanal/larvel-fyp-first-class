@@ -53,12 +53,17 @@
 
                                     </td>
                                     <td>
-                                        <a class="btn btn-info"
-                                            href="{{ route('applyjob.index.update', ['type' => 'pending', 'id' => $apply->id]) }}">Pending</a>
-                                        <a class="btn btn-dark"
-                                            href="{{ route('applyjob.index.update', ['type' => 'accepted', 'id' => $apply->id]) }}">Accepted</a>
-                                        <a class="btn btn-danger"
-                                            href="{{ route('applyjob.index.update', ['type' => 'cancel', 'id' => $apply->id]) }}">Cancel</a>
+                                        @if ($apply->status == 'accepted')
+                                            <a class="btn btn-danger"
+                                                href="{{ route('applyjob.index.update', ['type' => 'cancel', 'id' => $apply->id]) }}">Cancel</a>
+                                        @else
+                                            {{-- <a class="btn btn-info"
+                                            href="{{ route('applyjob.index.update', ['type' => 'pending', 'id' => $apply->id]) }}">Pending</a> --}}
+                                            <a class="btn btn-dark"
+                                                href="{{ route('applyjob.index.update', ['type' => 'accepted', 'id' => $apply->id]) }}">Accepted</a>
+                                            <a class="btn btn-danger"
+                                                href="{{ route('applyjob.index.update', ['type' => 'cancel', 'id' => $apply->id]) }}">Cancel</a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
