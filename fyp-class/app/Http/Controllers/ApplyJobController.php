@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ApplyJob;
 use App\Models\Job;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -15,9 +16,16 @@ class ApplyJobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $applied = ApplyJob::all();
+        $applied = ApplyJob::query();
+        if ($request->from && $request->to) {
+            $applied = $applied->whereBetween('created_at', [$request->from, $request->to]);
+        }
+        // current month
+        // $from = Carbon::now()->startOfMonth();
+        // $to = Carbon::now();
+        $applied = $applied->get();
         return view('backend.pages.applied.index', compact('applied'));
     }
 

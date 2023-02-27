@@ -12,7 +12,29 @@
 
     <section class="section dashboard">
         <div>
-
+            <form action="">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="from">From</label>
+                            <input type="date" name="from" id="from" class="form-control" placeholder="From"
+                                aria-describedby="helpId">
+                            <small id="helpId" class="text-muted">Help text</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="to">To</label>
+                            <input type="date" name="to" id="to" class="form-control" placeholder="to"
+                                aria-describedby="helpId">
+                            <small id="helpId" class="text-muted">Help text</small>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-dark w-100 my-3">Filter</button>
+                    </div>
+                </div>
+            </form>
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">applied Table</h5>
@@ -23,7 +45,7 @@
                         </div>
                     @endif
                     <!-- Default Table -->
-                    <table class="table">
+                    <table class="table" id="example">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -75,4 +97,25 @@
 
         </div>
     </section>
+@endsection
+@section('scripts')
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.4/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.print.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+        });
+    </script>
 @endsection
