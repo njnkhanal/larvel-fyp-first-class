@@ -21,6 +21,22 @@ class ApplyJobController extends Controller
         return view('backend.pages.applied.index', compact('applied'));
     }
 
+
+    public function statusUpdate($type, $id)
+    {
+        $applied = ApplyJob::findOrFail($id);
+        if ($type == 'pending') {
+            $applied->status = 'pending';
+        } else if ($type == 'cancel') {
+            $applied->status = 'cancel';
+        } else if ($type == 'accepted') {
+            $applied->status = 'accepted';
+        } else {
+            $applied->status = 'pending';
+        }
+        $applied->save();
+        return back()->with('success', 'updated succesfully');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -62,7 +78,7 @@ class ApplyJobController extends Controller
         }
         ApplyJob::create($data);
         // return back()->
-        return redirect()->route('job.applied',$id)->with('success','Applied successfully!');
+        return redirect()->route('job.applied', $id)->with('success', 'Applied successfully!');
     }
 
     /**

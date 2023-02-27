@@ -33,6 +33,7 @@
                                 <th scope="col">Email</th>
                                 <th scope="col">Resume</th>
                                 <th scope="col">Job</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,10 +45,20 @@
                                     <td>{{ $apply->contact }}</td>
                                     <td>{{ $apply->email }}</td>
                                     <td>
-                                        <a class="btn btn-info" href="{{ asset($apply->resume) }}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> View</a>
+                                        <a class="btn btn-info" href="{{ asset($apply->resume) }}" target="_blank"><i
+                                                class="fa fa-eye" aria-hidden="true"></i> View</a>
                                     </td>
                                     <td>
                                         <span class="badge bg-dark">{{ $apply->job ? $apply->job->title : '' }}</span>
+
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-info"
+                                            href="{{ route('applyjob.index.update', ['type' => 'pending', 'id' => $apply->id]) }}">Pending</a>
+                                        <a class="btn btn-dark"
+                                            href="{{ route('applyjob.index.update', ['type' => 'accepted', 'id' => $apply->id]) }}">Accepted</a>
+                                        <a class="btn btn-danger"
+                                            href="{{ route('applyjob.index.update', ['type' => 'cancel', 'id' => $apply->id]) }}">Cancel</a>
                                     </td>
                                 </tr>
                             @endforeach

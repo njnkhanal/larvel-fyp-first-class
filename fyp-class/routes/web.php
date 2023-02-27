@@ -53,6 +53,7 @@ Auth::routes([
 Route::prefix('admin')->middleware('auth', 'admin')->group(function () {
     Route::get('/', [App\Http\Controllers\AdminController::class, 'admin']);
     Route::get('/jobapply', [App\Http\Controllers\ApplyJobController::class, 'index'])->name('applyjob.index');
+    Route::get('/jobapply/{type}/status/{id}', [App\Http\Controllers\ApplyJobController::class, 'statusUpdate'])->name('applyjob.index.update');
     Route::resource('/category', App\Http\Controllers\CategoryController::class);
     Route::resource('/company', App\Http\Controllers\CompanyController::class);
     Route::resource('/job', App\Http\Controllers\JobController::class);
