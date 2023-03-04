@@ -1,11 +1,11 @@
 @extends('backend.layouts.headerfooter')
 @section('body-content')
     <div class="pagetitle">
-        <h1>Category Index</h1>
+        <h1>company Index</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active">Categories</li>
+                <li class="breadcrumb-item active">Companies</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -15,7 +15,7 @@
 
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Category Table <a href="{{ route('category.create') }}"
+                    <h5 class="card-title">company Table <a href="{{ route('company.create') }}"
                             class="btn btn-sm btn-primary">Add New</a></h5>
 
                     @if (session('success'))
@@ -28,27 +28,31 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Title</th>
-                                <th scope="col">Image</th>
+                                <th scope="col">Name</th>
+                                {{-- <th scope="col">Image</th> --}}
+                                <th scope="col">Manager</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $category)
+                            @foreach ($companies as $company)
                                 <tr>
-                                    <th scope="row">{{ $category->id }}</th>
-                                    <td>{{ $category->title }}</td>
+                                    <th scope="row">{{ $company->id }}</th>
+                                    <td>{{ $company->name }}</td>
+                                    {{-- <td>
+                                        <img src="{{ asset($company->image) }}" alt="" height="50px">
+                                    </td> --}}
                                     <td>
-                                        <img src="{{ asset($category->image) }}" alt="" height="50px">
+                                        {{ $company->user ? $company->user->name : '' }}
                                     </td>
                                     <td><button class="btn">
-                                            Status <span class="badge bg-primary">{{ $category->status }}</span>
+                                            Status <span class="badge bg-primary">{{ $company->status }}</span>
                                         </button></td>
                                     <td>
-                                        <a class="btn btn-dark" href="{{ route('category.edit', $category->id) }}"
+                                        <a class="btn btn-dark" href="{{ route('company.edit', $company->id) }}"
                                             role="button">Edit</a>
-                                        <form action="{{ route('category.destroy', $category->id) }}" method="POST">
+                                        <form action="{{ route('company.destroy', $company->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-dark" type="submit">Delete</button>

@@ -113,6 +113,13 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link " href="{{ route('company.index') }}">
+                    <i class="bi bi-grid"></i>
+                    <span>Companies</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link " href="{{ route('job.index') }}">
                     <i class="bi bi-grid"></i>
                     <span>Jobs</span>

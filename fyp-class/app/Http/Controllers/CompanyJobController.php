@@ -40,6 +40,17 @@ class CompanyJobController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'title' => 'required|string|max:200',
+            'description' => 'required|string',
+            // 'image' => 'nullable|image|mimes:jpg,png,gif,webp,svg|max:2048',
+            'category_id' => 'required|exists:categories,id',
+            'status' => 'required|in:active,inactive'
+        ]);
+        $data = $request->all();
+        $data['company_id'] = Auth::user()->company_id;
+        Job::create($data);
+        return redirect(route('company.job.index'))->with('success', 'job Stored Successfully!');
     }
 
     /**

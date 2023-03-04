@@ -52,6 +52,21 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Company</label>
+                            <div class="col-sm-10">
+                                <select class="form-control @error('company_id') is-invalid @enderror" name="company_id"
+                                    id="inputText">
+                                    <option value="">Select Company</option>
+                                    @foreach ($companies as $company)
+                                        <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('company_id')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
                         <fieldset class="row mb-3">
                             <legend class="col-form-label col-sm-2 pt-0">Status</legend>
                             <div class="col-sm-10">

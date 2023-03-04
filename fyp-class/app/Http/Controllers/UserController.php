@@ -58,7 +58,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('backend.pages.user.edit', compact('user'));
     }
 
     /**
@@ -70,7 +71,15 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $request->validate([
+            'name' => 'required|string',
+            'role' => 'required|in:user,company,admin',
+            'status' => 'in:active,inactive',
+        ]);
+        $data = $request->all();
+        $user->update($data);
+        return redirect(route('user.index'))->with('success', 'User updated successfully!');
     }
 
     /**

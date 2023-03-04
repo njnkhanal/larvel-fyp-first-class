@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Company;
 use App\Models\job;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -32,7 +33,8 @@ class jobController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('backend.pages.job.create', compact('categories'));
+        $companies = Company::all();
+        return view('backend.pages.job.create', compact('categories', 'companies'));
     }
 
     /**
@@ -49,6 +51,7 @@ class jobController extends Controller
             'description' => 'required|string',
             // 'image' => 'nullable|image|mimes:jpg,png,gif,webp,svg|max:2048',
             'category_id' => 'required|exists:categories,id',
+            'company_id' => 'required|exists:companies,id',
             'status' => 'required|in:active,inactive'
         ]);
         $data = $request->all();
@@ -77,7 +80,8 @@ class jobController extends Controller
     {
         $job  = Job::findOrFail($id);
         $categories = Category::all();
-        return view('backend.pages.job.edit', compact('job', 'categories'));
+        $companies = Category::all();
+        return view('backend.pages.job.edit', compact('job', 'categories', 'companies'));
     }
 
     /**
@@ -96,6 +100,7 @@ class jobController extends Controller
             'description' => 'required|string',
             // 'image' => 'nullable|image|mimes:jpg,png,gif,webp,svg|max:2048',
             'category_id' => 'required|exists:categories,id',
+            'company_id' => 'required|exists:companies,id',
             'status' => 'required|in:active,inactive'
         ]);
         // take request data
